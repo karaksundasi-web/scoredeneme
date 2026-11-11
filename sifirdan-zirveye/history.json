@@ -1,0 +1,90 @@
+{
+ "deals": [
+  {
+   "category": "spark",
+   "seed": "2026-11-11:sifirdan-zirveye#1",
+   "dealt": [
+    "s1",
+    "s2",
+    "s3"
+   ],
+   "redeal_reason": null,
+   "pick": "s2",
+   "reason": "faceless one-fan rise fits code and puts the app's notifications at the centre",
+   "at": "2026-11-11T16:49",
+   "texts": {
+    "s1": "seed: Ancient ferrous metallurgy sites of Burkina Faso · place: a glacier cave · form: an ad for something impossible · medium: crayon · engine: a repair · tone: slapstick",
+    "s2": "seed: Oruro carnival · place: a bird's nest on a crane · form: no faces at all · medium: daguerreotype · colour: cyanotype blue · engine: a goodbye",
+    "s3": "seed: Kasubi Tombs · place: a ski lift chair · form: a poem's stanzas · medium: papier-mâché · engine: a wait · tone: zen calm"
+   },
+   "seeds": {
+    "s1": {
+     "name": "Ancient ferrous metallurgy sites of Burkina Faso",
+     "fact": "World Heritage site in Burkina Faso, Burkina Faso",
+     "link": "https://en.wikipedia.org/wiki/Ancient_Ferrous_Metallurgy_Sites_of_Burkina_Faso",
+     "pool": "place"
+    },
+    "s2": {
+     "name": "Oruro carnival",
+     "fact": "Religious festival in Oruro Bolivia, Bolivia",
+     "link": "https://en.wikipedia.org/wiki/Carnaval_de_Oruro",
+     "pool": "custom"
+    },
+    "s3": {
+     "name": "Kasubi Tombs",
+     "fact": "Grass thatched round house containing the tombs and insignia of Mutesa I, and three northern subsequent rulers of Buganda, Uganda",
+     "link": "https://en.wikipedia.org/wiki/Kasubi_Tombs",
+     "pool": "place"
+    }
+   }
+  },
+  {
+   "category": "look",
+   "seed": "2026-11-11:sifirdan-zirveye#1",
+   "dealt": [
+    "l1",
+    "l2",
+    "l3",
+    "l4",
+    "l5",
+    "l6"
+   ],
+   "redeal_reason": null,
+   "pick": "(re-dealt)",
+   "reason": "medium: 3D cinematic, needs film and cinematographer looks",
+   "at": "2026-11-11T16:51",
+   "texts": {
+    "l1": "Japanese Expo 70: futurist pavilions",
+    "l2": "Origami: folded paper worlds",
+    "l3": "Cyanotype: sun prints, Prussian blue",
+    "l4": "Michel Gondry: handmade in-camera tricks, cardboard worlds",
+    "l5": "Oskar Fischinger: visual music, abstract shapes on the beat",
+    "l6": "Blueprint: white line on blue"
+   }
+  },
+  {
+   "category": "look",
+   "seed": "2026-11-11:sifirdan-zirveye#2",
+   "dealt": [
+    "l1",
+    "l2",
+    "l3",
+    "l4",
+    "l5",
+    "l6"
+   ],
+   "redeal_reason": "medium: 3D cinematic, needs film and cinematographer looks",
+   "pick": null,
+   "reason": null,
+   "at": "2026-11-11T16:51",
+   "texts": {
+    "l1": "Iznik tiles: cobalt and coral patterns",
+    "l2": "William Eggleston: everyday saturated colour, dye-transfer",
+    "l3": "Sven Nykvist: soft north light, faces, simplicity",
+    "l4": "Alice Rohrwacher: 16mm warmth, rural magic realism",
+    "l5": "Sports broadcast graphics: live data overlays",
+    "l6": "Irving Penn: still life, white seamless, precision"
+   }
+  }
+ ]
+}

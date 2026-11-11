@@ -1,0 +1,7 @@
+# Candidates (idea: score app ad, "from zero to the top", football)
+
+1. **The Lift (s3: Kasubi Tombs rings · ski lift chair · stanzas · a wait · calm).** A club's rise as one chair lift climbing through the league tiers: each pylon is a season, each station sign is a league (Amateur, 3rd, 2nd, 1st, Super League). The rings of a thatched roof become the stadium's rings seen from above at the summit. The app's live score is the lift's station board; every win moves the chair one pylon. Told in short spoken stanzas.
+2. **The One-Fan Stand (s2: Oruro procession · a bird's nest on a crane · no faces · a goodbye · cyanotype blue).** No faces: one fan watches a muddy amateur pitch from a construction crane cab. Each goal notification on his phone, the procession of scarves and flares grows season by season, until the crane stands beside a full stadium. Goodbye to the empty stand.
+3. **The Forge (s1: iron smelting furnaces · a repair · slapstick).** A broken neighbourhood club is smelted like ore into steel: each match is a heat in a clay furnace, the score is the temperature gauge, sparks are the notifications; slapstick early failures, a hammered trophy at the end.
+4. **The Scoreboard Climb.** The app's score line itself is the stage: a 0-0 in the bottom of the table climbs row by row up the standings screen, live minute by minute, to first place.
+5. **Street to stadium (literal).** A kid on a street pitch grows into a pro scoring in a full stadium, his family following on the app.
