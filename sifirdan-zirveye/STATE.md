@@ -41,3 +41,16 @@ Read this first in a new session, after loading the cinecode skill (Claude Code:
 24-30 end card: logo, line, CTA · VO6
 Narration (42 words): Bu tribünde yıllarca tek kişiydim. / Her golü telefonumdan duydum. Sonra yanıma biri geldi. / Sonra bir mahalle. Sonra bütün şehir. / Ve bir akşam telefon yine titredi. / Bu sefer tribünde yalnız değildim. / [APP]. Her golü ilk sen duy.
 Open: app name, 2-3 differences, logo/colours, CTA
+
+## Brand (Allscore, user 2026-11-11; web research to confirm)
+- Name: Allscore · allscore.live · X @allscorelive · logo assets/allscore-logo.jpg (white open ring + two green dots + one white dot on navy)
+- Colours from the logo: navy #040E17 (ground), green #05D16E (lead, notifications), white #FFFFFF
+- Facts found (to confirm with the user): site line "Live scores, faster than ever"; X bio "Tüm skorlar, tek uygulama."; App Store listing (AllSc OU, unconfirmed same maker): live scores, match stats, AI match analysis, social features; Turkish football focus
+- Concept: Allscore's ring and dots become the stand filling up: the lone fan is the first green dot; seen from above at the summit, the full stadium's floodlit ring closes into the logo
+- Speed device: the phone buzzes a beat before the stadium roars (faster than ever)
+- Swap test: with a rival's name the ring-to-stadium close and the notification-first beat no longer fit
+## Card v2 changes
+- notifications and the lone fan's scarf in Allscore green #05D16E; world stays navy + sodium floodlights
+- 15-20: the crane rise ends top-down: the stadium ring + three light pools close into the Allscore mark
+- 20-24: phone buzzes "90+3' GOL", half a beat of silence, then the roar
+- VO6: "Allscore. Tüm skorlar, tek uygulama." · end card: logo, "Tüm skorlar, tek uygulama.", allscore.live
