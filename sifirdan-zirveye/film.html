@@ -76,14 +76,15 @@ const TYPE = {
 const CUES = {
   phone: 0,          // the phone lights up in the crane cab
   out: 2.4,          // cut outside: the crane, the empty pitch
-  promo: 6,          // "3. Lig'e yükseldi": scarves on the fence
-  seasons: 10,       // time-lapse: the crane builds the stand
+  promo: 6,          // "3. Lig'e yükseldi": scarves tied on the fence, one, then ten
+  seasons: 10,       // time-lapse: the stand rises round the pitch, flares, "2. Lig", "1. Lig"
   truss: 15,         // the last roof truss swings in
   lock: 17.4,        // the truss locks; the roof light runs round the arc
   top: 19,           // top down: the stadium is the Allscore mark
-  goal: 20,          // 90+3 GOL on the phone, a beat of silence
+  goal: 20,          // 90+3 GOL on the phone in the stand, half a beat of silence
   roar: 20.6,        // the stadium roars
-  card: 26,          // the end card
+  wide: 21.8,        // the fan in the stand, scarf over his head; above him the cab stands empty
+  card: 26.5,        // the end card
   end: DURATION,
 };
 
@@ -94,12 +95,72 @@ const CAPTION_STYLE = { role: 'display', accentRole: 'display', size: 0.062, cap
 const SCENES = [
   { chapter: 'C1', from: CUES.phone, to: CUES.out, draw: phoneLights, action: 'the phone lights up and buzzes on the cab dash', amb: { kind: 'water', gain: 0.06 } },
   { chapter: 'C1', from: CUES.out, to: CUES.promo, draw: fanLeansOut, action: 'the lone fan leans out of the crane cab, scarf unfurling', in: { type: 'cut' }, amb: { kind: 'air', gain: 0.06 } },
-  { chapter: 'C2', from: CUES.promo, to: CUES.truss, draw: notBuilt, action: 'later pass', in: { type: 'cut' }, amb: { kind: 'air', gain: 0.05 } },
+  { chapter: 'C2', from: CUES.promo, to: CUES.seasons, draw: scarvesTie, action: 'scarves are tied on the fence, one, then ten, as people arrive', in: { type: 'cut' }, amb: { kind: 'air', gain: 0.06 } },
+  { chapter: 'C2', from: CUES.seasons, to: CUES.truss, draw: standRises, action: 'the stand rises round the pitch season by season, flares light', in: { type: 'cut' }, amb: { kind: 'city', gain: 0.06 } },
   { chapter: 'C3', from: CUES.truss, to: CUES.goal, draw: trussLocks, action: 'the last roof truss locks and the roof light runs round the ring', in: { type: 'cut' }, amb: { kind: 'city', gain: 0.07 } },
-  { chapter: 'C4', from: CUES.goal, to: CUES.end, draw: notBuilt, action: 'later pass', in: { type: 'cut' }, amb: { kind: 'city', gain: 0.07 } },
+  { chapter: 'C4', from: CUES.goal, to: CUES.wide, draw: goalBuzzes, action: 'the phone in the fan\'s hand buzzes with the 90+3 goal, then the crowd rises', in: { type: 'smash' }, amb: { kind: 'room', gain: 0.01 } },
+  { chapter: 'C4', from: CUES.wide, to: CUES.card, draw: fanInStand, action: 'the fan raises his scarf in the full stand; the cab above is empty', in: { type: 'cut' }, amb: { kind: 'city', gain: 0.09 } },
+  { chapter: 'C5', from: CUES.card, to: CUES.end, draw: markCloses, action: 'the Allscore ring draws itself and its three dots land', in: { type: 'cut' }, amb: { kind: 'city', gain: 0.03 } },
 ];
 
-const SFX = [];
+// Every picture event gets its sound (review/sound-audit.md). Designed accents: 1 riser, 2 whooshes, 2 full hits.
+// The chime is the film's signature: Allscore's notification, two soft notes, returning at every step of the rise.
+const SFX = [
+  { at: 0.05, voice: 'buzz', gain: 0.5, wet: 0.05 },                    // the phone rattles on the dash
+  { at: 0.32, voice: 'chime', gain: 0.32, wet: 0.2 },                   // the GOL card lands
+  { at: 1.2, voice: 'foley', kind: 'tap', gain: 0.12, wet: 0.1 },       // rain beads hit the glass as we pull back
+  { at: CUES.out, voice: 'hum', dur: 3.6, gain: 0.08, wet: 0.3 },       // the one failing lamp's ballast hum, flickering
+  { at: CUES.out + 0.5, voice: 'foley', kind: 'cloth', gain: 0.22, wet: 0.2 },   // he stands
+  { at: CUES.out + 1.1, voice: 'foley', kind: 'step', gain: 0.25, wet: 0.2 },    // a boot on the cab floor
+  { at: CUES.out + 1.6, voice: 'flap', dur: 2.2, gain: 0.2, wet: 0.25 }, // the scarf takes the wind
+  { at: CUES.promo + 0.1, voice: 'chime', gain: 0.32, wet: 0.2 },       // 3. Lig
+  { at: CUES.promo + 0.9, voice: 'foley', kind: 'cloth', gain: 0.25, wet: 0.2 },  // the first scarf tied
+  { at: CUES.promo + 1.6, voice: 'steps', dur: 2.2, gain: 0.2, wet: 0.25 },       // people arrive on the gravel
+  { at: CUES.promo + 2.4, voice: 'claps', dur: 1.6, gain: 0.22, wet: 0.35 },      // the first handful of applause
+  { at: CUES.seasons - 0.35, voice: 'whoosh', dur: 0.7, gain: 0.28, wet: 0.25 },  // into the time-lapse
+  { at: CUES.seasons + 0.2, voice: 'chime', gain: 0.3, wet: 0.2 },      // 2. Lig
+  { at: CUES.seasons + 0.6, voice: 'roar', dur: 4.4, gain: 0.32, rise: 1, wet: 0.4 },   // the crowd grows with the stand
+  { at: CUES.seasons + 2.2, voice: 'chime', gain: 0.3, wet: 0.2 },      // 1. Lig
+  { at: CUES.seasons + 3.0, voice: 'hiss', dur: 2.0, gain: 0.12, wet: 0.3 },   // flares lit
+  { at: CUES.truss + 0.1, voice: 'creak', dur: 1.6, gain: 0.22, wet: 0.45 },   // the truss swings on its cable
+  { at: CUES.lock - 1.6, voice: 'riser', dur: 1.6, gain: 0.22, wet: 0.3 },     // into the lock
+  { at: CUES.lock, voice: 'clank', gain: 0.6, wet: 0.5 },               // steel locks on steel
+  { at: CUES.lock, voice: 'hit', gain: 0.5, wet: 0.45 },
+  { at: CUES.lock + 0.15, voice: 'lamps', dur: 1.3, gain: 0.1, wet: 0.4 },     // the roof lamps clack on round the ring
+  { at: CUES.top + 0.1, voice: 'chime', gain: 0.36, wet: 0.35 },        // the mark seen from above
+  { at: CUES.goal, voice: 'buzz', gain: 0.55, wet: 0.05 },              // 90+3: the phone first, then half a beat of silence
+  { at: CUES.goal + 0.08, voice: 'chime', gain: 0.34, wet: 0.15 },
+  { at: CUES.roar, voice: 'roar', dur: 5.9, gain: 0.95, wet: 0.45 },    // the stadium erupts
+  { at: CUES.roar, voice: 'hit', gain: 0.75, wet: 0.5 },
+  { at: CUES.wide, voice: 'claps', dur: 4.0, gain: 0.3, wet: 0.4 },
+  { at: CUES.wide + 0.2, voice: 'flap', dur: 2.5, gain: 0.18, wet: 0.2 },   // the scarf held up between two hands
+  { at: CUES.card - 0.35, voice: 'whoosh', dur: 0.7, gain: 0.25, wet: 0.25 },
+  { at: CUES.card + 0.6, voice: 'chime', gain: 0.42, wet: 0.35, big: true },   // the dots land: the brand's sound
+];
+// The film's own designed voices for SFX rows, built from the engine's noise and envelopes.
+const FILM_VOICES = {
+  buzz: (ctx, out, e) => { for (const d of [0, 0.32]) { const o = ctx.createOscillator(), lp = ctx.createBiquadFilter(), v = ctx.createGain(); o.type = 'square'; o.frequency.value = 172; lp.type = 'lowpass'; lp.frequency.value = 700;
+    env(v.gain, e.at + d, 0.01, e.gain * 0.5, 0.22); o.connect(lp).connect(v).connect(out); o.start(e.at + d); o.stop(e.at + d + 0.3); foley(ctx, out, e.at + d, 'tap', e.gain * 0.25); } },
+  chime: (ctx, out, e) => { [[hz('E5'), 0], [hz('B5'), 0.09]].concat(e.big ? [[hz('E6'), 0.18]] : []).forEach(([f, d]) => { for (const [m, gg] of [[1, 1], [2.01, 0.18]]) { const o = ctx.createOscillator(), v = ctx.createGain(); o.type = 'sine'; o.frequency.value = f * m;
+    env(v.gain, e.at + d, 0.004, e.gain * gg * 0.5, e.big ? 1.4 : 0.7); o.connect(v).connect(out); o.start(e.at + d); o.stop(e.at + d + 1.6); } }); },
+  hum: (ctx, out, e) => { const o = ctx.createOscillator(), v = ctx.createGain(); o.type = 'sawtooth'; o.frequency.value = 100; const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 420;
+    v.gain.setValueAtTime(0.0001, e.at); for (let t = e.at; t < e.at + e.dur; t += 1 / 30) v.gain.setValueAtTime(e.gain * (noise1(t * 9 + 3) > 0.18 ? 1 : 0.15), t); v.gain.setValueAtTime(0.0001, e.at + e.dur);
+    o.connect(lp).connect(v).connect(out); o.start(e.at); o.stop(e.at + e.dur + 0.05); },
+  flap: (ctx, out, e) => { for (let t = e.at; t < e.at + e.dur; t += 0.11 + 0.05 * hash1(Math.round(t * 100))) foley(ctx, out, t, 'cloth', e.gain * (0.5 + 0.5 * hash1(Math.round(t * 77)))); },
+  steps: (ctx, out, e) => { for (let t = e.at, i = 0; t < e.at + e.dur; t += 0.28 + 0.1 * hash1(i), i++) foley(ctx, out, t, 'step', e.gain * (0.6 + 0.4 * hash1(i + 9))); },
+  claps: (ctx, out, e) => { const n = Math.round(e.dur * 26); for (let i = 0; i < n; i++) { const t = e.at + e.dur * hash1(i * 3 + 1); foley(ctx, out, t, 'tap', e.gain * (0.3 + 0.7 * hash1(i * 7 + 2)) * Math.sin(Math.PI * (t - e.at) / e.dur)); } },
+  roar: (ctx, out, e) => { const s = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), lp = ctx.createBiquadFilter(), v = ctx.createGain(); s.buffer = noiseBuffer(ctx, 6, 311); s.loop = true;
+    bp.type = 'bandpass'; bp.frequency.value = 900; bp.Q.value = 0.5; lp.type = 'lowpass'; lp.frequency.value = 3200; const a = e.rise ? e.dur * 0.9 : 0.35;
+    v.gain.setValueAtTime(0.0001, e.at); v.gain.linearRampToValueAtTime(e.gain, e.at + a); for (let t = e.at + a; t < e.at + e.dur - 0.5; t += 0.4) v.gain.linearRampToValueAtTime(e.gain * (0.8 + 0.2 * noise1(t * 2 + 5)), t + 0.4);
+    v.gain.linearRampToValueAtTime(0.0001, e.at + e.dur); s.connect(bp).connect(lp).connect(v).connect(out); s.start(e.at, 1.3); s.stop(e.at + e.dur + 0.1); },
+  hiss: (ctx, out, e) => { const s = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), v = ctx.createGain(); s.buffer = noiseBuffer(ctx, 3, 41); s.loop = true; hp.type = 'highpass'; hp.frequency.value = 2600;
+    v.gain.setValueAtTime(0.0001, e.at); v.gain.linearRampToValueAtTime(e.gain, e.at + 0.3); v.gain.linearRampToValueAtTime(0.0001, e.at + e.dur); s.connect(hp).connect(v).connect(out); s.start(e.at); s.stop(e.at + e.dur + 0.05); },
+  creak: (ctx, out, e) => { const o = ctx.createOscillator(), bp = ctx.createBiquadFilter(), v = ctx.createGain(); o.type = 'sawtooth'; o.frequency.setValueAtTime(48, e.at); o.frequency.linearRampToValueAtTime(61, e.at + e.dur);
+    bp.type = 'bandpass'; bp.frequency.value = 520; bp.Q.value = 6; env(v.gain, e.at, 0.3, e.gain, e.dur); o.connect(bp).connect(v).connect(out); o.start(e.at); o.stop(e.at + e.dur + 0.4); },
+  clank: (ctx, out, e) => { for (const [f, q, d] of [[1240, 30, 1.2], [2710, 40, 0.9], [610, 20, 1.6]]) { const s = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), v = ctx.createGain(); s.buffer = noiseBuffer(ctx, 0.08, Math.round(f));
+    bp.type = 'bandpass'; bp.frequency.value = f; bp.Q.value = q; env(v.gain, e.at, 0.001, e.gain * 6, d); s.connect(bp).connect(v).connect(out); s.start(e.at); } },
+  lamps: (ctx, out, e) => { for (let i = 0; i < 14; i++) { const t = e.at + e.dur * i / 14; foley(ctx, out, t, 'tap', e.gain * (1 - i / 20)); } },
+};
 const ROOM = { secs: 2.6, decay: 3.4, tone: 4200 };
 const ARRANGEMENT = [
   { section: 'alone', from: 0, to: CUES.promo, parts: [] },
@@ -276,9 +337,9 @@ function three() {
   const tierM = std('#0d141c', { roughness: 0.85 });
   for (let i = 0; i < 5; i++) {
     const rIn = 72 + i * 6, h = 2 + i * 5;
-    const tier = new T.Mesh(new T.CylinderGeometry(rIn + 6, rIn, 5.2, 96, 1, true), tierM); tier.position.y = h; stadium.add(tier);
+    const tier = new T.Mesh(new T.CylinderGeometry(rIn + 6, rIn, 5.2, 96, 1, true), tierM); tier.position.y = h; tier.userData.h = h; stadium.add(tier); (W3.tiers ||= []).push(tier);
   }
-  const outerWall = new T.Mesh(new T.CylinderGeometry(RING.R - 6, RING.R - 6, 26, 128, 1, true), std('#0a1118', { roughness: 0.9, side: T.DoubleSide })); outerWall.position.y = 13; stadium.add(outerWall);
+  const outerWall = new T.Mesh(new T.CylinderGeometry(RING.R - 6, RING.R - 6, 26, 128, 1, true), std('#0a1118', { roughness: 0.9, side: T.DoubleSide })); outerWall.position.y = 13; stadium.add(outerWall); W3.outerWall = outerWall;
   // the roof: a flat annulus arc (the logo's ring) with a lit inner edge
   const a0 = RING.start * Math.PI / 180, aL = RING.len * Math.PI / 180;
   const roofShape = new T.Shape(); const seg = 128;
@@ -293,7 +354,7 @@ function three() {
   const panelTex = new T.CanvasTexture(pc); panelTex.wrapS = panelTex.wrapT = T.RepeatWrapping; panelTex.repeat.set(1 / 9, 1 / 9); panelTex.colorSpace = T.SRGBColorSpace;
   const roofM = std('#59626c', { map: panelTex, roughness: 0.55, metalness: 0.4 });
   const capM = new T.MeshBasicMaterial({ map: panelTex, color: '#f4f6f8', transparent: true, opacity: 0, side: T.DoubleSide, fog: false }); W3.capM = capM;
-  const roof = new T.Mesh(roofG, roofM); roof.rotation.x = Math.PI / 2; roof.position.y = 30; stadium.add(roof);
+  const roof = new T.Mesh(roofG, roofM); roof.rotation.x = Math.PI / 2; roof.position.y = 30; stadium.add(roof); W3.roof = roof;
   const cap = new T.Mesh(new T.ShapeGeometry(roofShape, 4), capM); cap.position.z = -0.42; roof.add(cap);   // the lit top: white only once the roof light runs   // shape y -> world z
   W3.roof = roof; W3.roofM = roofM;
   // roof lamps along the inner edge: lit one after another when the truss locks
@@ -305,8 +366,8 @@ function three() {
     cpos.set([rr * Math.cos(a), y, rr * Math.sin(a)], i * 3); const gr = r() < 0.22; ccol.set(gr ? [0.02, 0.82, 0.43] : [0.95, 0.95, 0.9], i * 3); }
   const crowdG = new T.BufferGeometry(); crowdG.setAttribute('position', new T.BufferAttribute(cpos, 3)); crowdG.setAttribute('color', new T.BufferAttribute(ccol, 3));
   const dotTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 32; const x = c.getContext('2d'); const gr = x.createRadialGradient(16, 16, 0, 16, 16, 16); gr.addColorStop(0, '#fff'); gr.addColorStop(0.35, 'rgba(255,255,255,0.8)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = gr; x.fillRect(0, 0, 32, 32); return new T.CanvasTexture(c); })();
-  const crowd = new T.Points(crowdG, new T.PointsMaterial({ map: dotTex, size: 0.7, vertexColors: true, transparent: true, opacity: 0.9, blending: T.AdditiveBlending, depthWrite: false, sizeAttenuation: true, fog: false }));
-  stadium.add(crowd); W3.crowd = crowd;
+  const crowd = new T.Points(crowdG, new T.PointsMaterial({ map: dotTex, size: 0.45, vertexColors: true, transparent: true, opacity: 0.9, blending: T.AdditiveBlending, depthWrite: false, sizeAttenuation: true, fog: false }));
+  stadium.add(crowd); W3.crowd = crowd; W3.crowdN = CN;
   // the last truss: the arc's final 18° section, hanging from the hook until it locks
   const lastShape = new T.Shape(); const b0 = a0 + aL - 18 * Math.PI / 180, bL = 18 * Math.PI / 180;
   for (let i = 0; i <= 24; i++) { const a = b0 + bL * i / 24; lastShape[i ? 'lineTo' : 'moveTo'](RING.R * Math.cos(a), -RING.R * Math.sin(a)); }
@@ -330,6 +391,27 @@ function three() {
   const cable = new T.Mesh(new T.CylinderGeometry(0.03, 0.03, 1, 4), std('#222')); hook.add(cable); W3.cable = cable;
   const block = new T.Mesh(new T.BoxGeometry(0.8, 1.1, 0.5), std('#c9a227', { metalness: 0.5 })); hook.add(block); W3.block = block;
 
+  // people: faceless silhouettes built from the fan's parts, varied in height and build
+  const figure = (h = 1, wide = 1) => { const f = new T.Group(); const t = new T.Mesh(new T.CapsuleGeometry(0.22 * wide, 0.5 * h, 4, 10), dark); t.position.y = 1.05 * h; f.add(t);
+    const hd = new T.Mesh(new T.SphereGeometry(0.13, 14, 10), dark); hd.position.y = 1.62 * h; f.add(hd);
+    const lg = new T.Mesh(new T.CapsuleGeometry(0.1 * wide, 0.62 * h, 4, 8), dark); lg.position.set(-0.1, 0.42 * h, 0); f.add(lg); const lg2 = lg.clone(); lg2.position.x = 0.1; f.add(lg2);
+    const aL = new T.Mesh(new T.CapsuleGeometry(0.06, 0.5 * h, 4, 8), dark); aL.position.set(-0.28 * wide, 1.12 * h, 0); f.add(aL); const aR = aL.clone(); aR.position.x = 0.28 * wide; f.add(aR);
+    f.userData = { aL, aR, h }; scene.add(f); return f; };
+  W3.figure = figure;
+  // the fence crowd of the promotion year: arrivals behind the rail
+  W3.fencePeople = Array.from({ length: 9 }, (_, i) => { const f = figure(0.92 + 0.16 * r(), 0.9 + 0.25 * r()); f.position.set(-22 + i * 5.2 + r() * 1.5, 0.15, 42.6 + r() * 1.4); f.rotation.y = Math.PI + (r() - 0.5) * 0.5; f.visible = false; return f; });
+  // scarves tied on the rail: green and white bars, each hanging and swinging in the wind
+  W3.railScarves = Array.from({ length: 11 }, (_, i) => { const m = new T.Mesh(new T.PlaneGeometry(0.17, 1.1, 1, 10), std('#ffffff', { map: scarfTex, side: T.DoubleSide, roughness: 0.9, emissive: '#05D16E', emissiveIntensity: 0.25 }));
+    m.userData = { x: -24 + i * 4.6 + r(), base: m.geometry.attributes.position.array.slice(), ph: r() * 6 }; m.visible = false; scene.add(m); return m; });
+  // flares: red glows with a little light, lit in the tiers as the stand rises
+  const FAN_A = 6 * Math.PI / 180; W3.FAN_A = FAN_A;
+  W3.flares = Array.from({ length: 26 }, (_, i) => { const a = i < 6 ? -FAN_A + (i - 2.5) * 0.045 : r() * TAU, rr = i < 6 ? 81 + r() * 6 : 74 + r() * 22, y = -0.6 + (rr - 72) * 0.85 + 1.6; const s = glow(PALETTE.flare, 7 + 5 * r(), scene); s.position.set(rr * Math.cos(a), y, rr * Math.sin(a)); s.userData = { ph: r() * 20, at: i < 6 ? 0.2 : r() }; s.visible = false; return s; });
+  W3.flareLights = Array.from({ length: 4 }, () => { const l = new T.PointLight(PALETTE.flare, 0, 60, 1.5); scene.add(l); return l; });
+  // the stand crowd near the camera at the end: thirty silhouettes in the first rows by the gap, the fan among them
+  W3.standPeople = Array.from({ length: 72 }, (_, i) => { const a = (-6 + (i % 24) * 1.0 + r() * 0.6) * Math.PI / 180, row = Math.floor(i / 24), rr = 73.2 + row * 1.25 + r() * 0.3;
+    const f = figure(0.92 + 0.16 * r(), 0.9 + 0.25 * r()); f.position.set(rr * Math.cos(a), -0.6 + (rr - 72) / 6 * 5.2, -rr * Math.sin(a)); f.lookAt(0, f.position.y, 0); f.userData.ph = r() * 3; f.visible = false; return f; });
+  W3.standFan = figure(1.0, 1.05); W3.standFan.visible = false;
+  { const a = 6.3 * Math.PI / 180, rr = 73.9; W3.standFan.position.set(rr * Math.cos(a), -0.6 + (rr - 72) / 6 * 5.2, -rr * Math.sin(a)); W3.standFan.lookAt(0, W3.standFan.position.y, 0); }
   Object.assign(W3, { T, renderer, scene, cam, ready: true });
   return W3;
 }
@@ -339,14 +421,31 @@ function setWorld(t, o) {
   const w = three(), T = w.T;
   // pylons: in the amateur years only the north-west lamp works, and it flickers
   w.pylons.forEach((p, i) => {
-    const on = o.stadium ? 0 : (i === 0 ? 1 : 0);
-    const fl = i === 0 && !o.stadium ? (noise1(t * 9 + 3) > 0.18 ? 1 : 0.15) * (0.85 + 0.15 * noise1(t * 31)) : 1;
+    const grow = o.grow ?? (o.stadium ? 1 : 0);
+    const on = o.allLamps ? 1 : o.stadium ? 0 : (i === 0 ? 1 : 0);
+    const fl = i === 0 && !o.stadium && !o.allLamps ? (noise1(t * 9 + 3) > 0.18 ? 1 : 0.15) * (0.85 + 0.15 * noise1(t * 31)) : 1;
     const v = on * fl;
-    p.spot.intensity = 2600 * v; p.halo.material.opacity = 0.9 * v; p.cone.material.uniforms.a.value = 0.11 * v;
+    p.spot.intensity = (o.allLamps ? 900 : 2600) * v; p.halo.material.opacity = 0.9 * v; p.cone.material.uniforms.a.value = 0.11 * v;
     p.lamps.forEach((l) => l.material.color.setRGB(0.12 + 0.88 * v, 0.1 + 0.84 * v, 0.08 + 0.7 * v));
-    p.grp.visible = !o.stadium;
+    p.grp.visible = !o.stadium || grow < 1;
   });
   w.stadium.visible = !!o.stadium; w.hemi.intensity = o.stadium ? 1.1 : 0.55;
+  { const grow = o.grow ?? (o.stadium ? 1 : 0), roofOn = o.stadium && o.roof !== false;
+    w.tiers.forEach((tr, i) => { const sc = clamp((grow - i / 5) * 5); tr.visible = sc > 0; tr.position.y = tr.userData.h - (1 - EASE.out(sc)) * 9; });
+    w.outerWall.visible = grow > 0.85; w.roof.visible = roofOn; w.truss.visible = roofOn; w.roofLamps.forEach((l) => (l.visible = roofOn));
+    w.crowd.geometry.setDrawRange(0, Math.floor(w.crowdN * grow * grow));
+    w.flares.forEach((f) => { f.visible = (o.flares ?? 0) > f.userData.at; f.material.opacity = 0.55 + 0.45 * noise1(t * 7 + f.userData.ph); });
+    w.flareLights.forEach((l, i) => { const f = w.flares[i * 5]; l.position.copy(f.position); l.intensity = f.visible ? 900 * (0.6 + 0.4 * noise1(t * 6 + i)) : 0; });
+    const nf = Math.ceil((o.fence ?? 0) * 9), ns = Math.ceil((o.rail ?? 0) * 11);
+    w.fencePeople.forEach((f, i) => (f.visible = i < nf));
+    w.railScarves.forEach((m, i) => { m.visible = i < ns; if (!m.visible) return; const P = m.geometry.attributes.position, B = m.userData.base;
+      for (let j = 0; j < P.count; j++) { const by = B[j * 3 + 1], sgl = (0.55 - by) / 1.1, wv = Math.sin(t * 6 + m.userData.ph - sgl * 5) * 0.08 * sgl;
+        P.setXYZ(j, m.userData.x + B[j * 3], 1.38 - sgl * 1.0, 41.5 + 0.05 + wv + sgl * 0.12); } P.needsUpdate = true; });
+    const cheer = o.cheer ?? 0;
+    w.standPeople.forEach((f) => { f.visible = !!o.standCrowd; const up = cheer * (0.7 + 0.3 * Math.sin(t * 9 + f.userData.ph)); f.userData.aL.rotation.z = -2.6 * up; f.userData.aR.rotation.z = 2.6 * up; f.userData.aL.position.y = f.userData.aR.position.y = 1.12 * f.userData.h + 0.3 * up; });
+    w.standFan.visible = !!o.standCrowd; w.fan.visible = !o.standCrowd;
+    const raise = o.raise ?? 0; w.standFan.userData.aL.rotation.z = -2.9 * raise; w.standFan.userData.aR.rotation.z = 2.9 * raise;
+    w.standFan.userData.aL.position.y = w.standFan.userData.aR.position.y = 1.12 + 0.35 * raise; }
   w.roofSpots.forEach((s) => (s.intensity = o.stadium ? 700 * (o.roofOn ?? 1) : 0));
   // crane: slewing a little in the wind, the red lamps blink
   w.slew.rotation.y = Math.atan2(-(0 - CRANE.z), (0 - CRANE.x)) + Math.PI + (o.slew || 0) + 0.004 * Math.sin(t * 0.7);
@@ -365,14 +464,14 @@ function setWorld(t, o) {
   // the scarf: held in the right hand when he leans out, tied to the dash otherwise; it flows with the wind
   w.scene.updateMatrixWorld(true);
   const hand = new T.Vector3(0, -0.28, 0).applyMatrix4(w.fanParts.armL.matrixWorld);
-  const anchor = lean > 0.05 ? hand : new T.Vector3(-0.7, 1.0, -1.05).applyMatrix4(w.cab.matrixWorld);
+  const anchor = o.standCrowd ? new T.Vector3(0, 0.55, 0).applyMatrix4(w.standFan.userData.aL.matrixWorld) : lean > 0.05 ? hand : new T.Vector3(-0.7, 1.0, -1.05).applyMatrix4(w.cab.matrixWorld);
   const pos = w.scarf.geometry.attributes.position, base = w.scarfBase;
-  const wind = new T.Vector3(0.6, 0, 0.8).normalize();
-  const fly = lean > 0.05 ? lean : 0;
+  const wind = o.standCrowd ? new T.Vector3(0, 0, 0).add(new T.Vector3(0, 0.55, 0).applyMatrix4(w.standFan.userData.aR.matrixWorld)).sub(anchor).multiplyScalar(1 / 1.3) : new T.Vector3(0.6, 0, 0.8).normalize();
+  const fly = o.standCrowd ? 1 : lean > 0.05 ? lean : 0;
   for (let i = 0; i < pos.count; i++) {
     const bx = base[i * 3], by = base[i * 3 + 1], s = (0.7 - by) / 1.4;           // 0 at the knot, 1 at the tail
     const wave = Math.sin(t * 9 - s * 7) * 0.12 * s + Math.sin(t * 5.3 - s * 4) * 0.06 * s;
-    const dx = wind.x * s * 1.3 * fly + bx * 0.9, dy = -s * 1.35 * (1 - 0.75 * fly) + wave * fly * 1.5, dz = wind.z * s * 1.3 * fly + wave * (1 - fly);
+    const dx = wind.x * s * 1.3 * fly + bx * 0.9, dy = wind.y * s * 1.3 * fly - s * 1.35 * (1 - 0.75 * fly) * (o.standCrowd ? 0.15 : 1) + wave * fly * 1.5, dz = wind.z * s * 1.3 * fly + wave * (1 - fly);
     pos.setXYZ(i, anchor.x + dx, anchor.y + dy, anchor.z + dz);
   }
   pos.needsUpdate = true; w.scarf.geometry.computeVertexNormals();
@@ -503,12 +602,107 @@ function trussLocks(g, k, t, S) {
   const [hx, , hz] = w.trussHome;
   const side = [hx * 0.3, 4, hz * 0.3], above = [0, 650, 0.01];   // from the pitch, looking up at the gap in the roof
   const camPos = side.map((v, i) => lerp(v, above[i], rise));
-  const camAt = [lerp(hx * 1.05, 0, rise), lerp(lerp(60, 40, EASE.out(lock)), 0, rise), lerp(hz * 1.05, 0, rise)];
+  const tl = EASE.out(lock), camAt = [lerp(hx + (1 - lock) * 8, 0, rise), lerp(30 + (1 - tl) * 14 + 2, 0, rise), lerp(hz + (1 - lock) * 10, 0, rise)];
   const up = [0, lerp(1, 0, rise), lerp(0, -1, rise)];
   setWorld(t, { stadium: true, truss: EASE.out(lock), roofLit: lit, dots, camPos, camAt, up, fov: lerp(44, 40, rise), fog: lerp(0.006, 0.0008, rise), rain: 0.18 * (1 - rise), rainBox: 60, cabLight: 0.4, phone: { on: 0 } });
   blit(g, w);
 }
-function notBuilt(g, k, t, S) { g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = PALETTE.bg; g.fillRect(0, 0, S.W, S.H); }
+// The Allscore notification as a screen overlay: the film's signature, returning changed at each step of the rise.
+// k: 0..1 its life (drops in, holds, lifts away); slot: 0 the top card, 1 the card under it (a stack).
+function notif(g, S, k, head, line, slot = 0) {
+  if (k <= 0 || k >= 1) return;
+  const inK = MOTION.back(clamp(k / 0.18), 1.3), outK = EASE.in(clamp((k - 0.86) / 0.14));
+  const w = S.W * 0.84, h = S.u * 0.2, x = (S.W - w) / 2, y = S.H * 0.13 + slot * (h + S.u * 0.025) - (1 - inK) * h * 0.8 - outK * h * 0.5;
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = clamp(k / 0.08) * (1 - outK);
+  g.shadowColor = 'rgba(0,0,0,0.5)'; g.shadowBlur = S.u * 0.04;
+  g.fillStyle = 'rgba(10,24,36,0.9)'; roundRect(g, x, y, w, h, S.u * 0.035); g.fill(); g.shadowBlur = 0;
+  g.strokeStyle = 'rgba(5,209,110,0.6)'; g.lineWidth = S.u * 0.003; roundRect(g, x, y, w, h, S.u * 0.035); g.stroke();
+  allscoreMark(g, x + S.u * 0.06, y + S.u * 0.055, S.u * 0.024);
+  g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  setType(g, TYPE, 'text', S.u * 0.026, { weight: 600 }); g.fillStyle = 'rgba(244,246,248,0.72)'; g.fillText('ALLSCORE', x + S.u * 0.1, y + S.u * 0.064);
+  g.textAlign = 'right'; setType(g, TYPE, 'text', S.u * 0.024, { weight: 400 }); g.fillStyle = 'rgba(244,246,248,0.5)'; g.fillText('şimdi', x + w - S.u * 0.04, y + S.u * 0.064);
+  g.textAlign = 'left'; setType(g, TYPE, 'display', S.u * 0.062, { weight: 800 }); g.fillStyle = PALETTE.accent; g.fillText(head, x + S.u * 0.045, y + S.u * 0.132);
+  setType(g, TYPE, 'text', S.u * 0.03, { weight: 600 }); g.fillStyle = '#F4F6F8'; g.fillText(line, x + S.u * 0.045, y + S.u * 0.178);
+  g.restore();
+}
+// S3 · 6–10 · truck right along the rail, 4 s, ease in-out, low by the fence. The promotion buzzes in; one stranger
+// ties a scarf on the rail, then the rail fills: ten scarves, nine people behind it, the lone lamp steady at last.
+function scarvesTie(g, k, t, S) {
+  const e = EASE.inOut(k), w = three();
+  const fill = MOTION.at(t, CUES.promo + 0.9, 2.6);
+  const camPos = [lerp(-34, -14, e), lerp(1.15, 1.5, e), lerp(37.6, 38.4, e)], camAt = [lerp(-14, 8, e), lerp(1.6, 1.9, e), lerp(42, 42.6, e)];
+  setWorld(t, { camPos, camAt, fov: 40, allLamps: fill > 0.5, rail: clamp(0.09 + fill), fence: clamp(0.11 + fill * 0.95), rain: 0.3, rainBox: 30, cabLight: 0.5, phone: { on: 0 } });
+  blit(g, w);
+  notif(g, S, MOTION.at(t, CUES.promo + 0.1, 3.4), "3. Lig'e yükseldi", 'Dereboyu SK  ·  Sezon 2');
+}
+// S3b · 10–15 · locked-off wide from the hill behind the north stand, a slow push in, 5 s. Time-lapse: the stand rises
+// tier by tier round the pitch, the crowd fills it, flares light red; "2. Lig", then "1. Lig" stack in.
+function standRises(g, k, t, S) {
+  const w = three(), grow = EASE.inOut(clamp(k * 1.08)), e = EASE.inOut(k);
+  const camPos = [lerp(-205, -180, e), lerp(150, 128, e), lerp(-160, -140, e)], camAt = [CRANE.x * 0.3, 0, CRANE.z * 0.3];
+  setWorld(t, { stadium: true, roof: false, grow, allLamps: true, flares: clamp((k - 0.3) * 1.6), camPos, camAt, fov: 40, fog: 0.004, rain: 0.12, rainBox: 120, cabLight: 0.6, phone: { on: 0 } });
+  blit(g, w);
+  notif(g, S, MOTION.at(t, CUES.seasons + 0.2, 4.6), "2. Lig'e yükseldi", 'Dereboyu SK  ·  Sezon 5', 0);
+  notif(g, S, MOTION.at(t, CUES.seasons + 2.2, 2.6), "1. Lig'e yükseldi", 'Dereboyu SK  ·  Sezon 8', 1);
+}
+// S5 · 20–21.8 · close, handheld, on the phone in the fan's hand in the stand; the crowd a blur of lights behind.
+// The 90+3 goal lands on the phone first; half a beat of silence; then the stand behind it erupts.
+function goalBuzzes(g, k, t, S) {
+  const w = three(), roar = MOTION.at(t, CUES.roar, 0.5);
+  const fp = w.standFan.position, amt = 1 + 2 * roar, hh = { x: amt * (2 * noise1(t * 1.1 + 9) - 1) * 0.4, y: amt * (2 * noise1(t * 0.9 + 29) - 1) * 0.4 };   // seeded, low-passed handheld
+  const camPos = [fp.x - 6 + hh.x * 0.6, fp.y + 2.4, fp.z - 3.5 + hh.y * 0.6], camAt = [fp.x + 6, fp.y + 3.4 + 2 * roar, fp.z + 3];
+  setWorld(t, { stadium: true, standCrowd: true, cheer: roar, flares: 1, camPos, camAt, fov: 50, fog: 0.004, rain: 0, cabLight: 0, phone: { on: 0 } });
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.filter = `blur(${(S.u * 0.012).toFixed(1)}px)`; g.drawImage(w.renderer.domElement, 0, 0, S.W, S.H); g.restore();
+  // the phone, held up in a silhouette hand, the screen the only sharp thing
+  const buzz = t < CUES.roar ? Math.sin(t * 150) * S.u * 0.004 * (1 - (t - CUES.goal) / 0.6) : 0;
+  const pw = S.u * 0.62, ph = pw * 2.05, px = (S.W - pw) / 2 + buzz + hh.x * S.u * 0.01, py = S.H * 0.2 + hh.y * S.u * 0.01 - roar * S.u * 0.05;
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = '#050607'; roundRect(g, px - S.u * 0.018, py - S.u * 0.018, pw + S.u * 0.036, ph + S.u * 0.036, S.u * 0.07); g.fill();
+  const sg = g.createLinearGradient(0, py, 0, py + ph); sg.addColorStop(0, '#0b1c2a'); sg.addColorStop(1, '#040E17'); g.fillStyle = sg; roundRect(g, px, py, pw, ph, S.u * 0.055); g.fill();
+  g.textAlign = 'center'; setType(g, TYPE, 'display', S.u * 0.15, { weight: 600 }); g.fillStyle = 'rgba(244,246,248,0.92)'; g.fillText('22:53', S.W / 2 + buzz, py + ph * 0.2);
+  setType(g, TYPE, 'text', S.u * 0.028, { weight: 400 }); g.fillStyle = 'rgba(244,246,248,0.6)'; g.fillText('Pazar, 19 Mayıs', S.W / 2 + buzz, py + ph * 0.25);
+  const ck = MOTION.back(clamp((t - CUES.goal) / 0.25), 1.3), cy = py + ph * 0.33 - (1 - ck) * S.u * 0.1;
+  g.globalAlpha = clamp((t - CUES.goal) / 0.1);
+  g.fillStyle = 'rgba(16,30,44,0.95)'; roundRect(g, px + S.u * 0.03, cy, pw - S.u * 0.06, S.u * 0.3, S.u * 0.04); g.fill();
+  g.strokeStyle = 'rgba(5,209,110,0.7)'; g.lineWidth = S.u * 0.004; roundRect(g, px + S.u * 0.03, cy, pw - S.u * 0.06, S.u * 0.3, S.u * 0.04); g.stroke();
+  allscoreMark(g, px + S.u * 0.09, cy + S.u * 0.06, S.u * 0.028);
+  g.textAlign = 'left'; setType(g, TYPE, 'text', S.u * 0.026, { weight: 600 }); g.fillStyle = 'rgba(244,246,248,0.72)'; g.fillText('ALLSCORE', px + S.u * 0.135, cy + S.u * 0.07);
+  setType(g, TYPE, 'display', S.u * 0.09, { weight: 800 }); g.fillStyle = PALETTE.accent; g.fillText("90+3'  GOL!", px + S.u * 0.065, cy + S.u * 0.17);
+  setType(g, TYPE, 'text', S.u * 0.03, { weight: 600 }); g.fillStyle = '#F4F6F8'; g.fillText("Dereboyu SK Süper Lig'de", px + S.u * 0.065, cy + S.u * 0.24);
+  g.restore();
+  // the hand: a dark silhouette holding the phone from below
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#030405';
+  g.beginPath(); g.moveTo(px - S.u * 0.05, S.H); g.bezierCurveTo(px - S.u * 0.04, py + ph * 0.75, px + S.u * 0.02, py + ph * 0.7, px + S.u * 0.06, py + ph * 0.78);
+  g.lineTo(px + pw * 0.35, py + ph + S.u * 0.03); g.lineTo(px + pw * 0.75, S.H); g.closePath(); g.fill();
+  g.beginPath(); g.ellipse(px + pw + S.u * 0.005, py + ph * 0.62, S.u * 0.035, S.u * 0.07, 0.2, 0, TAU); g.fill();   // fingers round the edge
+  g.restore();
+  if (roar > 0) flash(g, S, 0.25 * (1 - roar));
+}
+// S6 · 21.8–26.5 · from the pitch, a slow tilt up, 4.7 s, ease in-out: the fan in the first row with his scarf held
+// over his head among a roaring crowd, flares behind; the tilt ends on the crane above the gap, its cab dark and empty.
+function fanInStand(g, k, t, S) {
+  const w = three(), e = EASE.inOut(k), fp = w.standFan.position;
+  const camPos = [fp.x - 8, fp.y + 0.6 + e * 1.2, fp.z - 1.2], camAt = [lerp(fp.x, CRANE.x, e), lerp(fp.y + 1.7, CRANE.h + 1, e), lerp(fp.z, CRANE.z, e)];
+  const raise = EASE.out(MOTION.at(t, CUES.wide, 0.8));
+  setWorld(t, { stadium: true, standCrowd: true, cheer: 1, raise, flares: 1, camPos, camAt, fov: lerp(36, 44, e), fog: 0.004, rain: 0, cabLight: 0, phone: { on: 0 } });
+  blit(g, w);
+}
+// S7 · 26.5–30 · locked, the end card: the ring draws itself, the three dots land on the beat, the line reads, the URL.
+function markCloses(g, k, t, S) {
+  g.save(); g.setTransform(1, 0, 0, 1, 0, 0);
+  const bg = g.createRadialGradient(S.W / 2, S.H * 0.4, 0, S.W / 2, S.H * 0.4, S.H * 0.7); bg.addColorStop(0, '#0a1a28'); bg.addColorStop(1, PALETTE.bg);
+  g.fillStyle = bg; g.fillRect(0, 0, S.W, S.H);
+  const ring = EASE.out(clamp((t - CUES.card) / 0.8)), dots = clamp((t - CUES.card - 0.55) / 0.9);
+  const R = S.u * 0.2 * (1 + 0.02 * Math.sin((t - CUES.card) * 0.8)), cx = S.W / 2, cy = S.H * 0.4;
+  allscoreMark(g, cx, cy, R, { ring, dots });
+  const tk = clamp((t - CUES.card - 1.1) / 0.5), uk = clamp((t - CUES.card - 1.6) / 0.5);
+  g.textAlign = 'center'; g.globalAlpha = tk; setType(g, TYPE, 'display', S.u * 0.085, { weight: 700 }); g.fillStyle = '#F4F6F8';
+  g.fillText('Tüm skorlar, tek uygulama.', cx, cy + R * 1.75 + (1 - EASE.out(tk)) * S.u * 0.03);
+  g.globalAlpha = uk; setType(g, TYPE, 'text', S.u * 0.036, { weight: 600 }); g.fillStyle = PALETTE.accent;
+  g.fillText('allscore.live', cx, cy + R * 2.25 + (1 - EASE.out(uk)) * S.u * 0.02);
+  g.restore();
+}
+
 
 function score(ctx, out) {
   // The user chose a real open-licence recording (STATE.md Music); it goes in OWN_MUSIC once fetched.
@@ -1639,6 +1833,7 @@ function sfx(ctx, out, e) {
   else if (e.voice === 'riser') riser(ctx, o, e.at, e.dur ?? 1.6, e.gain);
   else if (e.voice === 'tick') tick(ctx, o, e.at, e.gain);
   else if (e.voice === 'foley') foley(ctx, o, e.at, e.kind ?? 'tap', e.gain);
+  else if (typeof FILM_VOICES !== 'undefined' && FILM_VOICES[e.voice]) FILM_VOICES[e.voice](ctx, o, e);
   else throw new Error(`SFX: unknown voice ${e.voice}`);
 }
 // Arrangement helpers. spans(part): [from, to) runs where the part plays, neighbouring sections merged (one voice per
