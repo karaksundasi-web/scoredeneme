@@ -2,7 +2,7 @@
 
 Read this first in a new session, after loading the cinecode skill (Claude Code: the Skill tool, never a plain read of SKILL.md), then `python3 /home/user/scoredeneme/.claude/skills/cinecode/scripts/init_film.py . --update-tools` silently (the kit's newest tools). Kit: /home/user/scoredeneme/.claude/skills/cinecode · Method: `/home/user/scoredeneme/.claude/skills/cinecode/references/quick-mode.md`
 
-- **Phase:** 2 The card (text gate)
+- **Phase:** 4 Draft (rendering)
 - **Format source:** <none · saved format name (FORMAT.md)>
 - **Purpose:** ad & product (`/home/user/scoredeneme/.claude/skills/cinecode/references/purpose-ad.md`)
 - **Idea:** A score app ad, "sıfırdan zirveye" (user) · chosen reading: The One-Fan Stand: no faces; one fan watches an amateur pitch from a crane cab; with each goal notification the crowd grows season by season until the crane stands by a full stadium
@@ -21,11 +21,11 @@ Read this first in a new session, after loading the cinecode skill (Claude Code:
 - **Key moments:** <2–4: time · what the film rests on there · its sound moment> · **Thesis line:** <the chosen wording> · **Ending:** <how it closes>
 - **On-screen names:** <labels for places, products or people, or "none">
 - **Sound design:** review/sound-audit.md · beds: cab water, crane air, time-lapse city, stadium city · all effects code-made in this draft (libraries blocked by the network), to be replaced with recordings
-- **Last output:** <renders/draft-vN.mp4 (half size, no finishing) or renders/film-v1.mp4 (final, after the user's OK)> · checks: hook <PASS> · action <flags> · sceneloud <flags> · listening note sent <yes>
-- **Open notes:** <notes/round-N.md: the open items, or none>
+- **Last output:** review/stills-7.jpg (two-scene gate, approved "Devam"); draft v1 rendering (make.py draft, CHROME_PATH=logs/chrome-sw.sh for software WebGL) · checks: hook <PASS> · action <flags> · sceneloud <flags> · listening note sent <yes>
+- **Open notes:** music recording pending network (user opening hosts); narration: EMA Lightning installing (user has no Gemini key), then an audition by ear; recorded SFX pending network
 - **Revision round:** 0 of 2 <!-- a re-plan (new scenes or a new length) is shown as a new plan + one still per scene; it does not count as a round -->
 - **Re-plans:** <none · date: what changed, stills approved>
-- **Next action:** <one line>
+- **Next action:** EMA audition of VO1 → user picks → tts.py --engine ema all lines → VO table → make.py draft (or --sound-only); when network opens: music search (3 previews) and recorded SFX
 
 ## Log
 | Date | What | File |
