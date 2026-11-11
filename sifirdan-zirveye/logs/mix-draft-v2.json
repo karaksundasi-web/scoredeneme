@@ -1,0 +1,67 @@
+{
+ "duration": 30,
+ "out": "audio/mix-draft-v2.wav",
+ "layers": [
+  {
+   "file": "audio/film.wav",
+   "at": 0,
+   "bus": "music"
+  },
+  {
+   "file": "assets/sfx/wikimedia-24020009-rain-1-ogg.ogg",
+   "at": 0,
+   "bus": "ambience",
+   "gain_db": -14,
+   "trim": [
+    0,
+    10.4
+   ],
+   "fade_in": 0.3,
+   "fade_out": 0.8
+  },
+  {
+   "file": "assets/sfx/wikimedia-24006238-clapping-hurray-ogg.ogg",
+   "at": 8.3,
+   "bus": "foley",
+   "gain_db": -16,
+   "fade_out": 0.6
+  },
+  {
+   "file": "assets/sfx/wikimedia-24006238-clapping-hurray-ogg.ogg",
+   "at": 21.9,
+   "bus": "foley",
+   "gain_db": -10,
+   "fade_out": 0.6
+  },
+  {
+   "file": "audio/vo-t/VO1.wav",
+   "at": 2.8,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO2.wav",
+   "at": 6.5,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO3.wav",
+   "at": 10.8,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO4.wav",
+   "at": 17.55,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO5.wav",
+   "at": 22.6,
+   "bus": "dialogue"
+  },
+  {
+   "file": "audio/vo-t/VO6.wav",
+   "at": 27.3,
+   "bus": "dialogue"
+  }
+ ]
+}

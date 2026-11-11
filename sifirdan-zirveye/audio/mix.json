@@ -3,6 +3,11 @@
  "out": "audio/mix-v2.wav",
  "layers": [
   {
+   "file": "audio/film.wav",
+   "at": 0,
+   "bus": "music"
+  },
+  {
    "file": "assets/sfx/wikimedia-24020009-rain-1-ogg.ogg",
    "at": 0,
    "bus": "ambience",
