@@ -25,3 +25,4 @@ research/.cache/
 __pycache__/
 # brand fonts supplied by the user stay local
 fonts/
+node_modules/

@@ -1,0 +1,12 @@
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000015.jpg'
+duration 1
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000048.jpg'
+duration 1
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000108.jpg'
+duration 1
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000168.jpg'
+duration 1
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000498.jpg'
+duration 1
+file '/home/user/scoredeneme/sifirdan-zirveye/review/stills-4/000588.jpg'
+duration 1

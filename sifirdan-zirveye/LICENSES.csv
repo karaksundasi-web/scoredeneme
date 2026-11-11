@@ -2,3 +2,6 @@ file,title,author,source_url,licence,licence_url,attribution_text,modifications,
 https://cdn.jsdelivr.net/npm/three@0.186.1,three.js 0.186.1,three.js authors,https://github.com/mrdoob/three.js,MIT,https://github.com/mrdoob/three.js/blob/dev/LICENSE,three.js (MIT),none,,engine (only if engine/scene.html is used),software; loaded by import map
 https://cdn.jsdelivr.net/npm/postprocessing@6.39.5,postprocessing 6.39.5,Raoul van Rüschen (pmndrs),https://github.com/pmndrs/postprocessing,Zlib,https://github.com/pmndrs/postprocessing/blob/main/LICENSE.md,postprocessing (Zlib),none,,engine (only if engine/scene.html is used),software; loaded by import map
 assets/allscore-logo.jpg,Allscore logo,Allscore,user upload,client brand asset (owner supplied),,none,none,2026-11-11,end card,supplied by the client
+fonts/BarlowCondensed-*.woff2,Barlow Condensed,Jeremy Tribby,https://github.com/jpt/barlow,OFL-1.1,https://openfontlicense.org,,merged latin+latin-ext subsets,2026-11-11,type,via @fontsource
+fonts/Inter-*.woff2,Inter,Rasmus Andersson,https://github.com/rsms/inter,OFL-1.1,https://openfontlicense.org,,merged latin+latin-ext subsets,2026-11-11,type,via @fontsource
+node_modules/three,three.js 0.186.1,three.js authors,https://github.com/mrdoob/three.js,MIT,https://github.com/mrdoob/three.js/blob/dev/LICENSE,three.js (MIT),none,2026-11-11,engine,local npm copy
