@@ -1,0 +1,22 @@
+[
+ {
+  "id": "A-normal",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 34,
+  "seconds": 1.88,
+  "file": "review/voices/A-normal.wav"
+ },
+ {
+  "id": "B-yavas",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 34,
+  "seconds": 2.12,
+  "file": "review/voices/B-yavas.wav"
+ }
+]

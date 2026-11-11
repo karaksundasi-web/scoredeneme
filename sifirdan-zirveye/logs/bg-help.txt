@@ -1,0 +1,34 @@
+usage: beat_grid.py [-h] [--from T0] [--to T1] [--lrc LRC] [--json JSON] audio
+
+The beat grid of the user's own song or track: tempo, beat phase, downbeats (bars) and where each lyric line lands
+(Python 3 standard library + ffmpeg; no installs).
+
+  python3 tools/beat_grid.py song.mp3                          # BPM, half-time, first beat, first downbeat, bars
+  python3 tools/beat_grid.py song.mp3 --from 42 --to 102       # only that part of the song
+  python3 tools/beat_grid.py song.mp3 --lrc song.lrc           # + each lyric line's beat and bar
+  python3 tools/beat_grid.py song.mp3 --json audio/beats.json  # everything as JSON (bars, lines) for the cue table
+
+The tempo is measured on the whole song (up to 6 minutes) even when --from/--to pick a part; the part only sets the
+phase and the downbeat, and a note is printed when the part alone reads differently (an intro in a dotted figure).
+
+Method: an onset envelope from the change in short-time energy (log, rectified, local mean removed), the tempo from
+its autocorrelation between 70 and 170 BPM (interpolated lag), the beat phase from the comb of beats that collects
+the most onset energy, and the downbeat from the low band (under 150 Hz: kick and bass) summed per beat position in
+a bar of four. The pulse strength (how far the tempo's autocorrelation peak stands above its mean) says whether there is a beat
+at all: noise, wind and drones measure about 1.1x, songs 3x and more, and audio without any sharp onset (a held
+tone, silence) reads 0; under 2x the grid is not to be cut to. Songs in 3/4 or with a soft low end can get the downbeat wrong: check the printed bar times by ear
+or against the lyric lines (lines usually start a fraction of a beat before a bar). For a ballad the half-time
+pulse often reads better as BPM in film.html. Method after the beat grid of tuzhechen2005/opus-video-skills (MIT).
+
+Then cut a clip that starts on a downbeat, so film time 0 is a bar line (the command is printed), set BPM and
+BEAT0 = 0 in film.html, and put cues on beat(n) / bar(n) (references/music-video.md).
+
+positional arguments:
+  audio
+
+options:
+  -h, --help   show this help message and exit
+  --from T0    start (s) in the song
+  --to T1      end (s) in the song
+  --lrc LRC    lyric timings ([mm:ss.xx] text per line)
+  --json JSON  write the grid as JSON here

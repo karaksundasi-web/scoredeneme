@@ -1,0 +1,88 @@
+{
+ "query": "rain",
+ "type": "sound",
+ "results": [
+  {
+   "source": "wikimedia",
+   "id": "198353653",
+   "title": "Rain and wind in London 2026 08 28.wav",
+   "creator": "Acabashi",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:Rain_and_wind_in_London_2026_08_28.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/7/73/Rain_and_wind_in_London_2026_08_28.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "licence_name": "CC BY-SA 4.0",
+   "n": 1
+  },
+  {
+   "source": "wikimedia",
+   "id": "132339511",
+   "title": "\u092c\u093e\u0930\u093f\u0936.ogg",
+   "creator": "RandomPenguin24",
+   "licence": "cc0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E0%A4%AC%E0%A4%BE%E0%A4%B0%E0%A4%BF%E0%A4%B6.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/0/00/%E0%A4%AC%E0%A4%BE%E0%A4%B0%E0%A4%BF%E0%A4%B6.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "licence_name": "CC0",
+   "n": 2
+  },
+  {
+   "source": "wikimedia",
+   "id": "131219663",
+   "title": "Sound of light rainfall.ogg",
+   "creator": "Mijesty",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:Sound_of_light_rainfall.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/1/15/Sound_of_light_rainfall.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "licence_name": "CC BY-SA 4.0",
+   "n": 3
+  },
+  {
+   "source": "wikimedia",
+   "id": "24020009",
+   "title": "Rain (1).ogg",
+   "creator": "ezwa",
+   "licence": "pd",
+   "page": "https://commons.wikimedia.org/wiki/File:Rain_(1).ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Rain_%281%29.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_name": "Public domain",
+   "n": 4
+  },
+  {
+   "source": "wikimedia",
+   "id": "33686629",
+   "title": "Heavy Rain in Summer.ogg",
+   "creator": "Fiver, der Hellseher",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:Heavy_Rain_in_Summer.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/6/69/Heavy_Rain_in_Summer.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "licence_name": "CC BY-SA 3.0",
+   "n": 5
+  },
+  {
+   "source": "wikimedia",
+   "id": "1101330",
+   "title": "Rain and thunder.ogg",
+   "creator": "User:Caesar",
+   "licence": "pd",
+   "page": "https://commons.wikimedia.org/wiki/File:Rain_and_thunder.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/4/42/Rain_and_thunder.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_name": "Public domain",
+   "n": 6
+  }
+ ]
+}

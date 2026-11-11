@@ -1,0 +1,84 @@
+{
+ "query": "stadium crowd",
+ "type": "sound",
+ "results": [
+  {
+   "source": "archive",
+   "id": "10-queen-medley-radio-edit",
+   "title": "Westlife - Twenty Tour: Live at Croke Park (2020) [CD 16bits / 44100hz]",
+   "creator": "Eaglevision Europe",
+   "licence": "pd",
+   "page": "https://archive.org/details/10-queen-medley-radio-edit",
+   "file": "https://archive.org/download/10-queen-medley-radio-edit/01%20Hello%20My%20Love.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "n": 1
+  },
+  {
+   "source": "archive",
+   "id": "aporee_60354_69320",
+   "title": "Pulkve\u017ea Brie\u017ea iela 6, Stren\u010di, Stren\u010du pils\u0113ta, LV-4730, Latvia - sports relay",
+   "creator": "maksims sentelevs",
+   "licence": "pd",
+   "page": "https://archive.org/details/aporee_60354_69320",
+   "file": "https://archive.org/download/aporee_60354_69320/SportaStafetesStrencustadions26423.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "n": 2
+  },
+  {
+   "source": "archive",
+   "id": "aporee_65154_75249",
+   "title": "TUIL Stadium, Tromsdalen, Romssav\u00e1ggi, North Norway / S\u00e1pmi - Stadium ambience",
+   "creator": "anguscarlyle",
+   "licence": "pd",
+   "page": "https://archive.org/details/aporee_65154_75249",
+   "file": "https://archive.org/download/aporee_65154_75249/football20240903162614.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "n": 3
+  },
+  {
+   "source": "archive",
+   "id": "icc-all-star-sixes-derby-a-global-cricket-extravaganza",
+   "title": "ICC All Star Sixes Derby A Global Cricket Extravaganza",
+   "creator": "Jeffrey A Brick",
+   "licence": "pd",
+   "page": "https://archive.org/details/icc-all-star-sixes-derby-a-global-cricket-extravaganza",
+   "file": "https://archive.org/download/icc-all-star-sixes-derby-a-global-cricket-extravaganza/ICC%20All-Star%20Sixes%20Derby_%20A%20Global%20Cricket%20Extravaganza.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "n": 4
+  },
+  {
+   "source": "archive",
+   "id": "radioVanloon-10_15",
+   "title": "Bloody sunday: 50 anni senza giustizia",
+   "creator": "radio Vanloon",
+   "licence": "pd",
+   "page": "https://archive.org/details/radioVanloon-10_15",
+   "file": "https://archive.org/download/radioVanloon-10_15/20220129_Bloody_Sunday_Irlanda_Anniversario.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/mark/1.0/",
+   "n": 5
+  },
+  {
+   "source": "archive",
+   "id": "aporee_70614_82350",
+   "title": "Vallekas, Madrid, Community of Madrid, Spain - Horses on Vallekas",
+   "creator": "Sono Mayrit",
+   "licence": "cc-by",
+   "page": "https://archive.org/details/aporee_70614_82350",
+   "file": "https://archive.org/download/aporee_70614_82350/260102223910PolisRayoCaballo.mp3",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+   "n": 6
+  }
+ ]
+}

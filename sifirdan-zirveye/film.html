@@ -45,7 +45,7 @@ const PURPOSE = 'ad';
 // Look: authored "Gece stadı" on the cinematic-realistic family: sodium floodlights in fog, backlit black silhouettes,
 // Allscore green carried only by the app (notifications, the phone's glow, the fan's scarf).
 const LOOKS = {
-  'night-stadium': { grade: 'contrast(1.08) saturate(0.96)', bloom: 0.32, texture: null, vignette: 0.38, grain: 0.045, grainHold: 1, hold: 30, line: 0, steps: 0,
+  'night-stadium': { grade: 'brightness(1.1) contrast(1.06) saturate(1.0)', bloom: 0.32, texture: null, vignette: 0.38, grain: 0.045, grainHold: 1, hold: 30, line: 0, steps: 0,
     palette: { bg: '#040E17', ink: '#F4F6F8', accent: '#05D16E', dim: '#1B2A3A' } },
 };
 const LOOK_ID = 'night-stadium';
@@ -53,10 +53,10 @@ const LOOK = LOOKS[LOOK_ID];
 const FINISH = { shutter: null, weave: 0, tone: null };
 const FPS = 30;
 const DURATION = 30;
-const BPM = 100;
+const BPM = 135.46;                         // measured: Path to Glory (beat_grid.py)
 const BEAT0 = 0;
 const beat = (n) => BEAT0 + n * 60 / BPM, bar = (n) => beat(4 * n);
-const OWN_MUSIC = null;                     // the user picked a real open-licence recording; set once it is fetched
+const OWN_MUSIC = { file: 'audio/music.wav', gain: 0.8 };   // Path to Glory (Moonwalk, CC BY), cut on bar lines in audio/music.wav
 const INSTRUMENTS = [];
 const CAST = {};
 const FORMULAS = {};
@@ -88,7 +88,8 @@ const CUES = {
   end: DURATION,
 };
 
-const VO = [];                              // narration lines come after the voice pick
+const VO = [{ id: 'VO1', at: 2.8, dur: 2.12 }, { id: 'VO2', at: 6.5, dur: 3.4 }, { id: 'VO3', at: 10.8, dur: 2.4 },
+  { id: 'VO4', at: 17.55, dur: 2.48 }, { id: 'VO5', at: 22.6, dur: 2.16 }, { id: 'VO6', at: 27.3, dur: 2.6 }];   // EMA Lightning, speed 0.9, picked by ear
 const CAPTIONS = null;
 const CAPTION_STYLE = { role: 'display', accentRole: 'display', size: 0.062, caps: false, ink: PALETTE.ink, hi: PALETTE.ink, accent: PALETTE.accent, punch: 0.07 };
 
@@ -130,7 +131,7 @@ const SFX = [
   { at: CUES.top + 0.1, voice: 'chime', gain: 0.36, wet: 0.35 },        // the mark seen from above
   { at: CUES.goal, voice: 'buzz', gain: 0.55, wet: 0.05 },              // 90+3: the phone first, then half a beat of silence
   { at: CUES.goal + 0.08, voice: 'chime', gain: 0.34, wet: 0.15 },
-  { at: CUES.roar, voice: 'roar', dur: 5.9, gain: 0.95, wet: 0.45 },    // the stadium erupts
+  { at: CUES.roar, voice: 'roar', dur: 5.9, gain: 0.7, wet: 0.45 },    // the stadium erupts
   { at: CUES.roar, voice: 'hit', gain: 0.75, wet: 0.5 },
   { at: CUES.wide, voice: 'claps', dur: 4.0, gain: 0.3, wet: 0.4 },
   { at: CUES.wide + 0.2, voice: 'flap', dur: 2.5, gain: 0.18, wet: 0.2 },   // the scarf held up between two hands
@@ -180,7 +181,7 @@ function three() {
   const T = window.THREE, r = rng(101);
   const renderer = new T.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true, alpha: false });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false);
-  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.7;
   renderer.outputColorSpace = T.SRGBColorSpace;
   const scene = new T.Scene();
   scene.background = new T.Color('#050d16');
@@ -193,7 +194,7 @@ function three() {
   const add = (m, p) => { (p || scene).add(m); return m; };
 
   // sky glow: a faint sodium dome low on the horizon (the city behind the fog)
-  const hemi = new T.HemisphereLight('#24384f', '#0a0604', 0.55); scene.add(hemi); W3.hemi = hemi;
+  const hemi = new T.HemisphereLight('#2f4864', '#0a0604', 0.8); scene.add(hemi); W3.hemi = hemi;
   const rim = new T.DirectionalLight('#8fb0d8', 0.9); rim.position.set(-120, 60, -40); scene.add(rim); W3.rim = rim;   // the city's cold glow behind the pitch: rims every silhouette
 
   // ground: the amateur pitch, worn to mud in the goalmouths and the centre, puddles that catch the floodlight
@@ -312,7 +313,7 @@ function three() {
 
   // the fan: a stylised silhouette (no face), black against the light, the green scarf the only colour on him
   const fan = new T.Group(); cab.add(fan); fan.position.set(-0.35, 0.6, 0.1); W3.fan = fan;
-  const dark = std('#07080a', { roughness: 0.9 });
+  const dark = new T.MeshBasicMaterial({ color: '#040506' });   // silhouettes: black whatever the light
   const torso = new T.Mesh(new T.CapsuleGeometry(0.22, 0.42, 4, 10), dark); torso.position.y = 0.55; fan.add(torso);
   const head = new T.Mesh(new T.SphereGeometry(0.13, 16, 12), dark); head.position.y = 1.02; fan.add(head);
   const hood = new T.Mesh(new T.SphereGeometry(0.15, 16, 12, 0, TAU, 0, 1.9), dark); hood.position.set(0, 1.04, 0.03); fan.add(hood);
@@ -429,7 +430,7 @@ function setWorld(t, o) {
     p.lamps.forEach((l) => l.material.color.setRGB(0.12 + 0.88 * v, 0.1 + 0.84 * v, 0.08 + 0.7 * v));
     p.grp.visible = !o.stadium || grow < 1;
   });
-  w.stadium.visible = !!o.stadium; w.hemi.intensity = o.stadium ? 1.1 : 0.55;
+  w.stadium.visible = !!o.stadium; w.hemi.intensity = o.stadium ? 1.5 : 0.8;
   { const grow = o.grow ?? (o.stadium ? 1 : 0), roofOn = o.stadium && o.roof !== false;
     w.tiers.forEach((tr, i) => { const sc = clamp((grow - i / 5) * 5); tr.visible = sc > 0; tr.position.y = tr.userData.h - (1 - EASE.out(sc)) * 9; });
     w.outerWall.visible = grow > 0.85; w.roof.visible = roofOn; w.truss.visible = roofOn; w.roofLamps.forEach((l) => (l.visible = roofOn));
@@ -442,11 +443,11 @@ function setWorld(t, o) {
       for (let j = 0; j < P.count; j++) { const by = B[j * 3 + 1], sgl = (0.55 - by) / 1.1, wv = Math.sin(t * 6 + m.userData.ph - sgl * 5) * 0.08 * sgl;
         P.setXYZ(j, m.userData.x + B[j * 3], 1.38 - sgl * 1.0, 41.5 + 0.05 + wv + sgl * 0.12); } P.needsUpdate = true; });
     const cheer = o.cheer ?? 0;
-    w.standPeople.forEach((f) => { f.visible = !!o.standCrowd; const up = cheer * (0.7 + 0.3 * Math.sin(t * 9 + f.userData.ph)); f.userData.aL.rotation.z = -2.6 * up; f.userData.aR.rotation.z = 2.6 * up; f.userData.aL.position.y = f.userData.aR.position.y = 1.12 * f.userData.h + 0.3 * up; });
+    w.standPeople.forEach((f) => { f.visible = !!o.standCrowd; f.position.y = f.userData.y0 ??= f.position.y; f.position.y += cheer * 0.18 * Math.max(0, Math.sin(t * 7.1 + f.userData.ph * 2)); const up = cheer * (0.7 + 0.3 * Math.sin(t * 9 + f.userData.ph)); f.userData.aL.rotation.z = -2.6 * up; f.userData.aR.rotation.z = 2.6 * up; f.userData.aL.position.y = f.userData.aR.position.y = 1.12 * f.userData.h + 0.3 * up; });
     w.standFan.visible = !!o.standCrowd; w.fan.visible = !o.standCrowd;
     const raise = o.raise ?? 0; w.standFan.userData.aL.rotation.z = -2.9 * raise; w.standFan.userData.aR.rotation.z = 2.9 * raise;
     w.standFan.userData.aL.position.y = w.standFan.userData.aR.position.y = 1.12 + 0.35 * raise; }
-  w.roofSpots.forEach((s) => (s.intensity = o.stadium ? 700 * (o.roofOn ?? 1) : 0));
+  w.roofSpots.forEach((s) => (s.intensity = o.stadium ? 1800 * (o.roofOn ?? 1) : 0));
   // crane: slewing a little in the wind, the red lamps blink
   w.slew.rotation.y = Math.atan2(-(0 - CRANE.z), (0 - CRANE.x)) + Math.PI + (o.slew || 0) + 0.004 * Math.sin(t * 0.7);
   const blink = (Math.floor(t * 1.2) % 2) ? 1 : 0.15; w.redLamp.material.opacity = blink; w.jibLamp.material.opacity = blink;

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "VO1",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 34,
+  "seconds": 2.12,
+  "file": "audio/vo/VO1.wav"
+ },
+ {
+  "id": "VO2",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 54,
+  "seconds": 3.4,
+  "file": "audio/vo/VO2.wav"
+ },
+ {
+  "id": "VO3",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 37,
+  "seconds": 2.4,
+  "file": "audio/vo/VO3.wav"
+ },
+ {
+  "id": "VO4",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 35,
+  "seconds": 2.48,
+  "file": "audio/vo/VO4.wav"
+ },
+ {
+  "id": "VO5",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 34,
+  "seconds": 2.16,
+  "file": "audio/vo/VO5.wav"
+ },
+ {
+  "id": "VO6",
+  "engine": "ema",
+  "model": "ema-lightning",
+  "voice": "tr",
+  "style": "",
+  "chars": 36,
+  "seconds": 2.6,
+  "file": "audio/vo/VO6.wav"
+ }
+]

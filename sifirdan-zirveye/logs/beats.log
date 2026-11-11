@@ -1,0 +1,5 @@
+bpm 135.46 (half-time 67.73) · beat 0.4429 s · bar 1.772 s · pulse 1.99x (no clear beat: ambient, speech or a drone; do not cut to this grid)
+first beat 0.475 s · first downbeat 0.475 s (low-end accent 2.35x the average; under 1.15x the downbeat is a guess)
+bars: 0.47 2.25 4.02 5.79 7.56 9.33 11.11 12.88 …
+clip on a bar line: ffmpeg -ss 0.475 -t <length> -i "review/music/526018.mp3" -af "afade=t=out:st=<length-2>:d=2" -ac 2 -ar 48000 audio/music.wav   (then BPM = 135.46, BEAT0 = 0)
+grid -> audio/beats.json

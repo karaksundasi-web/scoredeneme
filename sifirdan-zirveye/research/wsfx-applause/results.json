@@ -1,0 +1,88 @@
+{
+ "query": "applause",
+ "type": "sound",
+ "results": [
+  {
+   "source": "wikimedia",
+   "id": "117971683",
+   "title": "277021 sandermotions applause-2.wav",
+   "creator": "Sandermotions",
+   "licence": "cc0",
+   "page": "https://commons.wikimedia.org/wiki/File:277021_sandermotions_applause-2.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/6/6d/277021_sandermotions_applause-2.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "licence_name": "CC0",
+   "n": 1
+  },
+  {
+   "source": "wikimedia",
+   "id": "117971523",
+   "title": "619016 mrrap4food clapping-then-leaving.mp3",
+   "creator": "mrrap4food",
+   "licence": "cc0",
+   "page": "https://commons.wikimedia.org/wiki/File:619016_mrrap4food_clapping-then-leaving.mp3",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/0/02/619016_mrrap4food_clapping-then-leaving.mp3?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "licence_name": "CC0",
+   "n": 2
+  },
+  {
+   "source": "wikimedia",
+   "id": "30153090",
+   "title": "Clapping hurray (cropped).oga",
+   "creator": "Starlite",
+   "licence": "pd",
+   "page": "https://commons.wikimedia.org/wiki/File:Clapping_hurray_(cropped).oga",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Clapping_hurray_%28cropped%29.oga?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_name": "Public domain",
+   "n": 3
+  },
+  {
+   "source": "wikimedia",
+   "id": "24006238",
+   "title": "Clapping hurray.ogg",
+   "creator": "starlite",
+   "licence": "pd",
+   "page": "https://commons.wikimedia.org/wiki/File:Clapping_hurray.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Clapping_hurray.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_name": "Public domain",
+   "n": 4
+  },
+  {
+   "source": "wikimedia",
+   "id": "133864244",
+   "title": "2023-06-03 Ronacher Wien Schlussaplaus Publikum-Musical.ogg",
+   "creator": "DrTrumpet",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:2023-06-03_Ronacher_Wien_Schlussaplaus_Publikum-Musical.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/f/f0/2023-06-03_Ronacher_Wien_Schlussaplaus_Publikum-Musical.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "licence_name": "CC BY-SA 4.0",
+   "n": 5
+  },
+  {
+   "source": "wikimedia",
+   "id": "99792174",
+   "title": "Clapping for Carers in Oxford, April 2020.opus",
+   "creator": "Pierre Marshall",
+   "licence": "cc0",
+   "page": "https://commons.wikimedia.org/wiki/File:Clapping_for_Carers_in_Oxford,_April_2020.opus",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Clapping_for_Carers_in_Oxford%2C_April_2020.opus?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "licence_name": "CC0",
+   "n": 6
+  }
+ ]
+}

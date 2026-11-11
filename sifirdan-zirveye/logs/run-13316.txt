@@ -1,0 +1,1 @@
+FAILED: audio/mix.json needs one layer with "bus": "music" (the score)

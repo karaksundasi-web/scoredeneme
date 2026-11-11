@@ -1,0 +1,90 @@
+{
+ "query": "crowd cheering",
+ "type": "sound",
+ "results": [
+  {
+   "source": "wikimedia",
+   "id": "3042891",
+   "title": "Fr-acclamation.ogg",
+   "creator": "Vion Nicolas",
+   "licence": "cc-by",
+   "page": "https://commons.wikimedia.org/wiki/File:Fr-acclamation.ogg",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/0/08/Fr-acclamation.ogg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/2.0/fr/deed.en",
+   "licence_name": "CC BY 2.0 fr",
+   "n": 1
+  },
+  {
+   "source": "wikimedia",
+   "id": "144638193",
+   "title": "LL-Q150 (fra)-Helenou66-acclamation.wav",
+   "creator": "Speaker: Helenou66 Recorder: Helenou66",
+   "licence": "cc0",
+   "page": "https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-Helenou66-acclamation.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/1/11/LL-Q150_%28fra%29-Helenou66-acclamation.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "licence_name": "CC0",
+   "n": 2
+  },
+  {
+   "source": "wikimedia",
+   "id": "78992232",
+   "title": "LL-Q150 (fra)-Aemines2-acclamation.wav",
+   "creator": "Speaker: Aemines2 Recorder: Aemines2",
+   "licence": "cc-by",
+   "page": "https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-Aemines2-acclamation.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/7/7e/LL-Q150_%28fra%29-Aemines2-acclamation.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "licence_name": "CC BY 4.0",
+   "n": 3
+  },
+  {
+   "source": "wikimedia",
+   "id": "78990857",
+   "title": "LL-Q150 (fra)-Aemines1-acclamation.wav",
+   "creator": "Speaker: Aemines1 Recorder: Aemines1",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-Aemines1-acclamation.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/a/af/LL-Q150_%28fra%29-Aemines1-acclamation.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "licence_name": "CC BY-SA 4.0",
+   "n": 4
+  },
+  {
+   "source": "wikimedia",
+   "id": "79138071",
+   "title": "LL-Q150 (fra)-Aemines6-acclamation.wav",
+   "creator": "Speaker: Aemines6 Recorder: Aemines6",
+   "licence": "cc-by",
+   "page": "https://commons.wikimedia.org/wiki/File:LL-Q150_(fra)-Aemines6-acclamation.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/5/54/LL-Q150_%28fra%29-Aemines6-acclamation.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "licence_name": "CC BY 4.0",
+   "n": 5
+  },
+  {
+   "source": "wikimedia",
+   "id": "89012044",
+   "title": "LL-Q1860 (eng)-Vealhurl-acclamation.wav",
+   "creator": "Speaker: Vealhurl Recorder: Vealhurl",
+   "licence": "cc-by-sa",
+   "page": "https://commons.wikimedia.org/wiki/File:LL-Q1860_(eng)-Vealhurl-acclamation.wav",
+   "file": "https://upload.wikimedia.org/wikipedia/commons/a/a3/LL-Q1860_%28eng%29-Vealhurl-acclamation.wav?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "thumb": null,
+   "type": "sound",
+   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "licence_name": "CC BY-SA 4.0",
+   "n": 6
+  }
+ ]
+}
