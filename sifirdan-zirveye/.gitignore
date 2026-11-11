@@ -26,3 +26,5 @@ __pycache__/
 # brand fonts supplied by the user stay local
 fonts/
 node_modules/
+logs/probe-*.jpg
+*.whl
